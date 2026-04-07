@@ -1,9 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Book, Wine as WineIcon } from 'lucide-react';
+import StoreSection from './Store/StoreSection';
 
 const Passions = () => {
+  const [activeTab, setActiveTab] = useState<'books' | 'wines' | null>(null);
+
   return (
     <section id="paixoes" className="py-24 bg-stone-100 px-6">
       <div className="max-w-7xl mx-auto">
@@ -14,45 +17,58 @@ const Passions = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Livros */}
-          <div className="group relative overflow-hidden rounded-3xl bg-white p-12 shadow-sm hover:shadow-xl transition-all duration-500">
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Book size={120} className="text-emerald-900" />
-            </div>
+          <div 
+            className={`group relative overflow-hidden rounded-3xl p-12 shadow-sm transition-all duration-500 cursor-pointer ${activeTab === 'books' ? 'bg-emerald-900 text-white' : 'bg-white text-stone-800'}`}
+            onClick={() => setActiveTab(activeTab === 'books' ? null : 'books')}
+          >
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-8 text-emerald-800">
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${activeTab === 'books' ? 'bg-white/10 text-white' : 'bg-emerald-50 text-emerald-800'}`}>
                 <Book size={32} />
               </div>
-              <h3 className="text-3xl font-serif text-stone-800 mb-6">A Biblioteca da Floresta</h3>
-              <p className="text-stone-600 text-lg mb-8 font-light leading-relaxed">
-                Nos livros, João viajava sem sair do lugar. Suas leituras eram como as árvores: cresciam lentas, mas alcançavam o céu. Explore os títulos que moldaram seu pensamento.
+              <h3 className="text-3xl font-serif mb-6">A Biblioteca da Floresta</h3>
+              <p className={`text-lg mb-8 font-light leading-relaxed ${activeTab === 'books' ? 'text-emerald-100' : 'text-stone-600'}`}>
+                Nos livros, João viajava sem sair do lugar. Explore os títulos que moldaram seu pensamento.
               </p>
-              <button className="text-emerald-800 font-semibold flex items-center gap-2 group-hover:gap-4 transition-all">
-                Explorar Acervo <span>→</span>
+              <button className="font-semibold flex items-center gap-2">
+                {activeTab === 'books' ? 'Fechar Acervo' : 'Explorar Acervo'} <span>{activeTab === 'books' ? '↑' : '↓'}</span>
               </button>
             </div>
           </div>
 
           {/* Vinhos */}
-          <div className="group relative overflow-hidden rounded-3xl bg-white p-12 shadow-sm hover:shadow-xl transition-all duration-500">
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-              <WineIcon size={120} className="text-red-900" />
-            </div>
+          <div 
+            className={`group relative overflow-hidden rounded-3xl p-12 shadow-sm transition-all duration-500 cursor-pointer ${activeTab === 'wines' ? 'bg-red-950 text-white' : 'bg-white text-stone-800'}`}
+            onClick={() => setActiveTab(activeTab === 'wines' ? null : 'wines')}
+          >
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mb-8 text-red-800">
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${activeTab === 'wines' ? 'bg-white/10 text-white' : 'bg-red-50 text-red-800'}`}>
                 <WineIcon size={32} />
               </div>
-              <h3 className="text-3xl font-serif text-stone-800 mb-6">O Vinho e o Tempo</h3>
-              <p className="text-stone-600 text-lg mb-8 font-light leading-relaxed">
-                No vinho, ele celebrava o essencial. Sabores que guardam o silêncio da terra e a paciência das estações. Descubra a seleção especial da Reserva.
+              <h3 className="text-3xl font-serif mb-6">O Vinho e o Tempo</h3>
+              <p className={`text-lg mb-8 font-light leading-relaxed ${activeTab === 'wines' ? 'text-red-100' : 'text-stone-600'}`}>
+                No vinho, ele celebrava o essencial. Sabores que guardam o silêncio da terra e a paciência das estações.
               </p>
-              <button className="text-red-800 font-semibold flex items-center gap-2 group-hover:gap-4 transition-all">
-                Descobrir Rótulos <span>→</span>
+              <button className="font-semibold flex items-center gap-2">
+                {activeTab === 'wines' ? 'Fechar Rótulos' : 'Descobrir Rótulos'} <span>{activeTab === 'wines' ? '↑' : '↓'}</span>
               </button>
             </div>
           </div>
         </div>
+
+        {activeTab && (
+          <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px flex-1 bg-stone-200" />
+              <h4 className="font-serif text-2xl text-stone-800">
+                {activeTab === 'books' ? 'Nossa Biblioteca' : 'Nossa Adega'}
+              </h4>
+              <div className="h-px flex-1 bg-stone-200" />
+            </div>
+            <StoreSection type={activeTab} />
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
+import { SITE_CONFIG } from '@/constants/config';
 
 const Legacy = () => {
   return (
     <section id="legado" className="relative py-32 bg-emerald-950 text-white overflow-hidden">
-      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-stone-100 to-transparent opacity-10" />
       
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
@@ -25,15 +25,15 @@ const Legacy = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-white/10">
           <div>
-            <p className="text-3xl font-serif mb-1">1.200+</p>
+            <p className="text-3xl font-serif mb-1">{SITE_CONFIG.legacyStats.treesPlanted}</p>
             <p className="text-emerald-400/60 text-sm uppercase tracking-wider">Árvores Plantadas</p>
           </div>
           <div>
-            <p className="text-3xl font-serif mb-1">450+</p>
+            <p className="text-3xl font-serif mb-1">{SITE_CONFIG.legacyStats.booksCataloged}</p>
             <p className="text-emerald-400/60 text-sm uppercase tracking-wider">Livros Catalogados</p>
           </div>
           <div>
-            <p className="text-3xl font-serif mb-1">∞</p>
+            <p className="text-3xl font-serif mb-1">{SITE_CONFIG.legacyStats.memories}</p>
             <p className="text-emerald-400/60 text-sm uppercase tracking-wider">Memórias Vivas</p>
           </div>
         </div>

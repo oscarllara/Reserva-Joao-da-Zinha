@@ -1,8 +1,9 @@
 "use client";
 
 import React from 'react';
-import { Book, Wine, TreePine, Menu } from 'lucide-react';
+import { TreePine, Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import CartDrawer from './Store/CartDrawer';
 
 const Navbar = () => {
   return (
@@ -22,7 +23,8 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="hidden sm:flex border-emerald-800 text-emerald-800 hover:bg-emerald-50">
+          <CartDrawer />
+          <Button variant="outline" className="hidden sm:flex border-emerald-800 text-emerald-800 hover:bg-emerald-50 rounded-xl">
             Visitar a Reserva
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden">
