@@ -6,15 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import CatalogManager from '@/components/Admin/CatalogManager';
 import OrderManager from '@/components/Admin/OrderManager';
 import UserManager from '@/components/Admin/UserManager';
+import ProductForm from '@/components/Admin/ProductForm';
 import { showError, showSuccess } from '@/utils/toast';
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('catalog');
   const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [isNewItemOpen, setIsNewItemOpen] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +27,14 @@ const Admin = () => {
     } else {
       showError("Credenciais inválidas. Tente novamente.");
     }
+  };
+
+  const handleAddNewItem = (data: any) => {
+    // Aqui no futuro chamaremos o Supabase
+    showSuccess("Item adicionado com sucesso!");
+    setIsNewItemOpen(false);
+    // Forçamos um refresh ou atualizamos o estado do CatalogManager
+    window.location.reload(); 
   };
 
   if (!isAuthenticated) {
@@ -83,7 +94,6 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-stone-100 flex">
-      {/* Sidebar */}
       <aside className="w-64 bg-stone-900 text-stone-300 flex flex-col">
         <div className="p-6 border-b border-stone-800">
           <h1 className="text-xl font-serif font-bold text-white">Reserva Admin</h1>
@@ -117,7 +127,6 @@ const Admin = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
       <main className="flex-1 p-8 overflow-y-auto">
         <header className="mb-8 flex justify-between items-center">
           <div>
@@ -125,7 +134,7 @@ const Admin = () => {
             <p className="text-stone-500">Controle total sobre a sua Reserva.</p>
           </div>
           {activeTab === 'catalog' && (
-            <Button className="bg-emerald-800 hover:bg-emerald-900 gap-2 rounded-xl">
+            <Button className="bg-emerald-800 hover:bg-emerald-900 gap-2 rounded-xl" onClick={() => setIsNewItemOpen(true)}>
               <Plus size={20} /> Novo Item
             </Button>
           )}
@@ -136,6 +145,16 @@ const Admin = () => {
           {activeTab === 'orders' && <OrderManager />}
           {activeTab === 'users' && <UserManager />}
         </div>
+
+        <Dialog open={isNewItemOpen} onOpenChange={setIsNewItemOpen}>
+          <DialogContent className="sm:max-w-[500px] bg-white">
+            <DialogHeader>
+              <DialogTitle className="font-serif text-2xl">Novo Item</DialogTitle>
+              <DialogDescription>Adicione um novo livro ou vinho ao catálogo da Reserva.</DialogDescription>
+            </DialogHeader>
+            <ProductForm onSubmit={handleAddNewItem} onCancel={() => setIsNewItemOpen(false)} />
+          </DialogContent>
+        </Dialog>
       </main>
     </div>
   );
