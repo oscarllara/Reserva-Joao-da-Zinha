@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { Instagram, Facebook, Mail } from 'lucide-react';
+import { Instagram, Facebook, Mail, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -20,7 +21,11 @@ const Footer = () => {
             <li><a href="#" className="hover:text-white transition-colors">Início</a></li>
             <li><a href="#historia" className="hover:text-white transition-colors">História</a></li>
             <li><a href="#paixoes" className="hover:text-white transition-colors">Vinhos & Livros</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Contato</a></li>
+            <li>
+              <Link to="/admin" className="hover:text-white transition-colors flex items-center gap-2">
+                <Lock size={12} /> Painel Administrativo
+              </Link>
+            </li>
           </ul>
         </div>
 
