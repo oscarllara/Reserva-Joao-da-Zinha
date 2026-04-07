@@ -5,7 +5,7 @@ import { SITE_CONFIG } from '@/constants/config';
 
 const Legacy = () => {
   return (
-    <section id="legado" className="relative py-32 bg-emerald-950 text-white overflow-hidden">
+    <section id="legado" className="relative py-32 bg-emerald-950 text-white overflow-hidden scroll-mt-20">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-stone-100 to-transparent opacity-10" />
       
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">

@@ -4,7 +4,7 @@ import React from 'react';
 
 const StorySection = () => {
   return (
-    <section id="historia" className="py-24 bg-[#fdfbf7] px-6">
+    <section id="historia" className="py-24 bg-[#fdfbf7] px-6 scroll-mt-20">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">

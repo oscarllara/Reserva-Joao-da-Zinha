@@ -20,12 +20,16 @@ const Hero = () => {
           "E o tempo aprende a descansar entre as raízes de quem amou o chão que pisou."
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-500">
-          <button className="bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-4 rounded-full text-lg font-medium transition-all transform hover:scale-105">
-            Conheça a Reserva
-          </button>
-          <button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-lg font-medium transition-all">
-            A História de João
-          </button>
+          <a href="#paixoes">
+            <button className="w-full sm:w-auto bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-4 rounded-full text-lg font-medium transition-all transform hover:scale-105">
+              Conheça a Reserva
+            </button>
+          </a>
+          <a href="#historia">
+            <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-lg font-medium transition-all">
+              A História de João
+            </button>
+          </a>
         </div>
       </div>
 
