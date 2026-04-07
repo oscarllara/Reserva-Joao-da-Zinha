@@ -45,45 +45,47 @@ const CatalogManager = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
-      <Table>
-        <TableHeader className="bg-stone-50">
-          <TableRow>
-            <TableHead className="w-[100px]">Imagem</TableHead>
-            <TableHead>Nome</TableHead>
-            <TableHead>Tipo</TableHead>
-            <TableHead>Preço</TableHead>
-            <TableHead className="text-right">Ações</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {products.map((product) => (
-            <TableRow key={product.id}>
-              <TableCell>
-                <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded-lg" />
-              </TableCell>
-              <TableCell className="font-medium text-stone-800">{product.name}</TableCell>
-              <TableCell>
-                <Badge variant="outline" className={product.type === 'Livro' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}>
-                  {product.type === 'Livro' ? <Book size={12} className="mr-1" /> : <Wine size={12} className="mr-1" />}
-                  {product.type}
-                </Badge>
-              </TableCell>
-              <TableCell>R$ {Number(product.price).toFixed(2)}</TableCell>
-              <TableCell className="text-right space-x-2">
-                <Button variant="ghost" size="icon" className="text-stone-400 hover:text-emerald-800" onClick={() => handleEdit(product)}>
-                  <Edit size={18} />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-stone-400 hover:text-red-600" onClick={() => handleDeleteClick(product)}>
-                  <Trash2 size={18} />
-                </Button>
-              </TableCell>
+      <div className="overflow-x-auto">
+        <Table className="min-w-[600px]">
+          <TableHeader className="bg-stone-50">
+            <TableRow>
+              <TableHead className="w-[80px]">Imagem</TableHead>
+              <TableHead>Nome</TableHead>
+              <TableHead>Tipo</TableHead>
+              <TableHead>Preço</TableHead>
+              <TableHead className="text-right">Ações</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {products.map((product) => (
+              <TableRow key={product.id}>
+                <TableCell>
+                  <img src={product.image} alt={product.name} className="w-10 h-10 object-cover rounded-lg" />
+                </TableCell>
+                <TableCell className="font-medium text-stone-800 text-sm">{product.name}</TableCell>
+                <TableCell>
+                  <Badge variant="outline" className={`text-[10px] ${product.type === 'Livro' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
+                    {product.type === 'Livro' ? <Book size={10} className="mr-1" /> : <Wine size={10} className="mr-1" />}
+                    {product.type}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-sm">R$ {Number(product.price).toFixed(2)}</TableCell>
+                <TableCell className="text-right space-x-1">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-stone-400 hover:text-emerald-800" onClick={() => handleEdit(product)}>
+                    <Edit size={16} />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-stone-400 hover:text-red-600" onClick={() => handleDeleteClick(product)}>
+                    <Trash2 size={16} />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       <Dialog open={!!editingProduct} onOpenChange={(open) => !open && setEditingProduct(null)}>
-        <DialogContent className="sm:max-w-[500px] bg-white">
+        <DialogContent className="sm:max-w-[500px] bg-white w-[95vw] rounded-2xl">
           <DialogHeader>
             <DialogTitle className="font-serif text-2xl">Editar Item</DialogTitle>
             <DialogDescription>Altere as informações do produto no catálogo.</DialogDescription>
@@ -97,14 +99,14 @@ const CatalogManager = () => {
       </Dialog>
 
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent className="sm:max-w-[400px] bg-white">
+        <DialogContent className="sm:max-w-[400px] bg-white w-[95vw] rounded-2xl">
           <DialogHeader>
             <DialogTitle className="text-red-600">Confirmar Exclusão</DialogTitle>
             <DialogDescription>
               Tem certeza que deseja remover "{productToDelete?.name}"? Esta ação não pode ser desfeita.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="gap-2">
+          <DialogFooter className="gap-2 flex-col sm:flex-row">
             <Button variant="ghost" onClick={() => setIsDeleteDialogOpen(false)}>Cancelar</Button>
             <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={confirmDelete}>Remover Item</Button>
           </DialogFooter>
