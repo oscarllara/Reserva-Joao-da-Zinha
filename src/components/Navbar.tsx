@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { TreePine, Menu, X } from 'lucide-react';
+import { TreePine, Menu, MapPin } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CartDrawer from './Store/CartDrawer';
+import { SITE_CONFIG } from '@/constants/config';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,8 +35,12 @@ const Navbar = () => {
         <div className="flex items-center gap-2 md:gap-4">
           <CartDrawer />
           
-          <Button variant="outline" className="hidden sm:flex border-emerald-800 text-emerald-800 hover:bg-emerald-50 rounded-xl h-9 md:h-10">
-            Visitar a Reserva
+          <Button 
+            variant="outline" 
+            className="hidden sm:flex border-emerald-800 text-emerald-800 hover:bg-emerald-50 rounded-xl h-9 md:h-10 gap-2"
+            onClick={() => window.open(SITE_CONFIG.googleMapsUrl, '_blank')}
+          >
+            <MapPin size={16} /> Visitar a Reserva
           </Button>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -48,8 +53,11 @@ const Navbar = () => {
               <div className="flex flex-col gap-6 text-lg font-serif text-stone-800">
                 <NavLinks />
               </div>
-              <Button className="bg-emerald-800 text-white rounded-xl h-12">
-                Visitar a Reserva
+              <Button 
+                className="bg-emerald-800 text-white rounded-xl h-12 gap-2"
+                onClick={() => window.open(SITE_CONFIG.googleMapsUrl, '_blank')}
+              >
+                <MapPin size={18} /> Visitar a Reserva
               </Button>
             </SheetContent>
           </Sheet>

@@ -1,6 +1,7 @@
 export const SITE_CONFIG = {
   pixKey: "036.695.536-57",
   whatsappNumber: "5535997014723",
+  googleMapsUrl: "https://maps.app.goo.gl/1uRwYfwZ9uD8Axt8A",
   legacyStats: {
     treesPlanted: "1.200+",
     booksCataloged: "450+",
