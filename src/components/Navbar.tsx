@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { TreePine, Menu, MapPin } from 'lucide-react';
+import { TreePine, Menu, MessageCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CartDrawer from './Store/CartDrawer';
@@ -9,6 +9,11 @@ import { SITE_CONFIG } from '@/constants/config';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleWhatsApp = () => {
+    const message = "Olá! Gostaria de saber mais informações sobre como visitar a Reserva João da Zinha.";
+    window.open(`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  };
 
   const NavLinks = () => (
     <>
@@ -38,9 +43,9 @@ const Navbar = () => {
           <Button 
             variant="outline" 
             className="hidden sm:flex border-emerald-800 text-emerald-800 hover:bg-emerald-50 rounded-xl h-9 md:h-10 gap-2"
-            onClick={() => window.open(SITE_CONFIG.googleMapsUrl, '_blank')}
+            onClick={handleWhatsApp}
           >
-            <MapPin size={16} /> Visitar a Reserva
+            <MessageCircle size={16} /> Agendar Visita
           </Button>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -55,9 +60,9 @@ const Navbar = () => {
               </div>
               <Button 
                 className="bg-emerald-800 text-white rounded-xl h-12 gap-2"
-                onClick={() => window.open(SITE_CONFIG.googleMapsUrl, '_blank')}
+                onClick={handleWhatsApp}
               >
-                <MapPin size={18} /> Visitar a Reserva
+                <MessageCircle size={18} /> Agendar Visita
               </Button>
             </SheetContent>
           </Sheet>
