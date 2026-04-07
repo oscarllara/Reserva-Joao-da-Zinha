@@ -6,9 +6,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Edit, Trash2, Book, Wine } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import ProductForm from './ProductForm';
-import { showSuccess, showError } from '@/utils/toast';
+import { showSuccess } from '@/utils/toast';
 
 const CatalogManager = () => {
   const [products, setProducts] = useState([...PRODUCTS.books.map(b => ({ ...b, type: 'Livro' })), ...PRODUCTS.wines.map(w => ({ ...w, type: 'Vinho' }))]);
@@ -82,7 +82,6 @@ const CatalogManager = () => {
         </TableBody>
       </Table>
 
-      {/* Modal de Edição/Criação */}
       <Dialog open={!!editingProduct} onOpenChange={(open) => !open && setEditingProduct(null)}>
         <DialogContent className="sm:max-w-[500px] bg-white">
           <DialogHeader>
@@ -97,7 +96,6 @@ const CatalogManager = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Modal de Confirmação de Exclusão */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent className="sm:max-w-[400px] bg-white">
           <DialogHeader>

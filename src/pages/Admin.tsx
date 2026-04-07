@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { LayoutDashboard, BookOpen, Wine, ShoppingBag, Users, LogOut, Plus, Lock } from 'lucide-react';
+import { BookOpen, ShoppingBag, Users, LogOut, Plus, Lock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import CatalogManager from '@/components/Admin/CatalogManager';
 import OrderManager from '@/components/Admin/OrderManager';
@@ -30,11 +30,9 @@ const Admin = () => {
   };
 
   const handleAddNewItem = (data: any) => {
-    // Aqui no futuro chamaremos o Supabase
     showSuccess("Item adicionado com sucesso!");
     setIsNewItemOpen(false);
-    // Forçamos um refresh ou atualizamos o estado do CatalogManager
-    window.location.reload(); 
+    // Em um cenário real com Supabase, atualizaríamos a lista via estado ou query
   };
 
   if (!isAuthenticated) {
